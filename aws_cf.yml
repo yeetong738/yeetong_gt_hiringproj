@@ -220,40 +220,6 @@ Resources:
       Port: 80
       Protocol: HTTP
 
-  WebServerInstance1Backup:
-    Type: AWS::EC2::Volume
-    Properties:
-      AvailabilityZone: !Select [0, !GetAZs '']
-      Size: 10 
-      Tags:
-        - Key: Name
-          Value: WebServerInstance1Backup
-
-  WebServerInstance2Backup:
-    Type: AWS::EC2::Volume
-    Properties:
-      AvailabilityZone: !Select [1, !GetAZs '']
-      Size: 10  
-      Tags:
-        - Key: Name
-          Value: WebServerInstance2Backup
-
-  WebServerInstance1Snapshot:
-    Type: AWS::EC2::VolumeAttachment
-    Properties:
-      InstanceId: !Ref WebServerInstance1
-      VolumeId: !Ref WebServerInstance1Backup
-      Device: /dev/sdf
-    DependsOn: WebServerInstance1
-
-  WebServerInstance2Snapshot:
-    Type: AWS::EC2::VolumeAttachment
-    Properties:
-      InstanceId: !Ref WebServerInstance2
-      VolumeId: !Ref WebServerInstance2Backup
-      Device: /dev/sdf
-    DependsOn: WebServerInstance2
-
 Outputs:
   VpcId:
     Description: VPC Id
